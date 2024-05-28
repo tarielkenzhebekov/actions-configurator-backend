@@ -1,0 +1,48 @@
+server:
+  port: 8814
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/actions_configurator
+    username: actions_configurator
+    password: 123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    open-in-view: true
+
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+  task:
+    scheduling:
+      pool:
+        size: 5
+
+application:
+  security:
+    jwt:
+      secret-key: 6e5b555f7a516232786850623f426b4e583f3c3a3e3079357144346558
+      access-token:
+        expiration: 86400000 # 1 день
+      refresh-token:
+        expiration: 604800000 # 7 дней
+  report:
+    file:
+      path: '/home/tariel/Desktop/report/'
+    scheduler:
+      cron: '0 */3 * * * *'
